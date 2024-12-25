@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 class pseuRand:
     def __init__(self):
         self.bi = (1 << 127) | 1
-        for i in range(int(round(time.time()))**2 % 10000):
+        for i in range(int(round(time.time()*10**2) % 10000)**2 % 10000):
             self.bi = next_lfsr(self.bi)
         self.num = 0
     def printNums(self):
