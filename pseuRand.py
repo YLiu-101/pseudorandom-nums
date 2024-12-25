@@ -17,7 +17,7 @@ class pseuRand:
             self.bi = next_lfsr(self.bi)
         self.num = self.bi & 1
         return self.num
-
+    
 if __name__ == "__main__":
     rando = pseuRand()
     print(rando.coinFlip())
