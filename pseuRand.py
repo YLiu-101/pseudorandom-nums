@@ -21,7 +21,8 @@ class pseuRand:
         """
         Models an n-sided die
         """
-        bin_length = math.log(sides)/math.log(2)
+        bin_length = math.floor(math.log(sides)/math.log(2))+1
+        
 
 if __name__ == "__main__":
     rando = pseuRand()
