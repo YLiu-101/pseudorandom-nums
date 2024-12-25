@@ -23,19 +23,29 @@ class pseuRand:
         """
         seconds = time.time()
         bin_length = math.floor(math.log(sides)/math.log(2))+1
+        print(bin_length, ((1 << bin_length)-1))
         for i in range(int(round(seconds))**2 % 1000):
             self.bi = next_lfsr(self.bi)
-        while (self.bi & ((1 >> bin_length)-1)) > sides-1:
+        while (self.bi & ((1 << bin_length)-1)) > sides-1:
+            # print((self.bi & ((1 >> bin_length)-1)))
             self.bi = next_lfsr(self.bi)
-        return (self.bi & ((1 >> bin_length)-1)) + 1
+        return (self.bi & ((1 << bin_length)-1)) + 1
 if __name__ == "__main__":
     rando = pseuRand()
     print(rando.coinFlip())
     a = []
-    n = 50000
+    n = 5000
     # Coin Flipping 
+    # for i in range(n):
+    #     a.append(rando.coinFlip())
+    # unique_elements, counts = np.unique(a, return_counts=True)
+    # print(unique_elements)
+    # print(counts,np.array(counts)/n)
+    ###################
+
+    # Die Rolling
     for i in range(n):
-        a.append(rando.coinFlip())
+        a.append(rando.nSideDie(3))
     unique_elements, counts = np.unique(a, return_counts=True)
     print(unique_elements)
     print(counts,np.array(counts)/n)
