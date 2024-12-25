@@ -4,7 +4,6 @@ import numpy as np
 import math
 import random
 import matplotlib.pyplot as plt
-random.seed(5000)
 class pseuRand:
     def __init__(self):
         self.bi = (1 << 127) | 1
@@ -16,7 +15,7 @@ class pseuRand:
     def coinFlip(self): #randomly ouputs a 0 or a 1
         seconds = time.time()
         
-        for i in range(int(round(seconds))**2 % 100):
+        for i in range(1+(round(seconds) % 10)**2): # adding one to ensure that we are not re-outputting old values again and again
             self.bi = next_lfsr(self.bi)
         self.num = self.bi & 1
         return self.num
@@ -29,10 +28,10 @@ class pseuRand:
         bin_num = sides+1
         a = []
         # print(bin_length, "{:08bf}".format(((1 << bin_length)-1)))
-        # x = random.randint(500,1000)
+        x = random.randint(500,1000)
         while bin_num > sides-1:    
-            bin_num = 0
-            for i in range(sides):
+            bin_num = self.coinFlip()
+            for i in range(sides*5):
                 bin_num = (((bin_num << 1) | (self.coinFlip())) & ((1 << bin_length)-1))
                 # a.append(bin_num)
                 # print(bin_num)
@@ -55,7 +54,7 @@ if __name__ == "__main__":
 
     # Die Rolling
     for i in range(n):
-        a.append(rando.nSideDie(52))
+        a.append(rando.nSideDie(8))
     unique_elements, counts = np.unique(a, return_counts=True)  
     print(unique_elements)
     print(counts,np.array(counts)/n)
