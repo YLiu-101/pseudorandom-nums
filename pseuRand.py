@@ -55,8 +55,10 @@ if __name__ == "__main__":
 
     # Die Rolling
     for i in range(n):
-        a.append(rando.nSideDie(7))
-    unique_elements, counts = np.unique(a, return_counts=True)
+        a.append(rando.nSideDie(52))
+    unique_elements, counts = np.unique(a, return_counts=True)  
     print(unique_elements)
     print(counts,np.array(counts)/n)
+    plt.bar(unique_elements,counts)
+    plt.show()
     # print(a)
