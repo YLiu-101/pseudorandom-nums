@@ -1,6 +1,7 @@
 import time
 from lfsr import main, next_lfsr
 import numpy as np
+import math
 class pseuRand:
     def __init__(self):
         self.bi = (1 << 127) | 1
@@ -13,11 +14,15 @@ class pseuRand:
         seconds = time.time()
         
         for i in range(int(round(seconds))**2 % 1000):
-            # print("{:08b}".format(self.bi))
             self.bi = next_lfsr(self.bi)
         self.num = self.bi & 1
         return self.num
-    
+    def nSideDie(self, sides):
+        """
+        Models an n-sided die
+        """
+        bin_length = math.log(sides)/math.log(2)
+
 if __name__ == "__main__":
     rando = pseuRand()
     print(rando.coinFlip())
